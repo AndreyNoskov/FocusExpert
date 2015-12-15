@@ -87,8 +87,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>D:\OpenCV3.0\build\include;INCLUDE;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\OpenCV3.0\build\x86\vc12\lib;D:\OpenCV3.0\build\x86\vc12\staticlib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(OPENCV_DIR)\include;INCLUDE;$(IncludePath)</IncludePath>
+    <LibraryPath>$(OPENCV_DIR)\x86\vc12\lib;$(OPENCV_DIR)\x86\vc12\staticlib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
