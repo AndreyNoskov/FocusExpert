@@ -13,11 +13,11 @@ int main()
 	for (it = imageList.begin(); it != imageList.end(); ++it)
 	{
 		cv::Mat img = cv::imread(*it);
-		cv::imshow("Image", img);
+		std::vector<cv::Point2i> tmp = GetCenters_optimize(img.rows, img.cols, 200.0f);
+		cv::imshow("Image", DrawCenters(img, 200.0f));
 		cv::waitKey(3000);
 	}
-		
-
+	cv::destroyAllWindows();
 	system("pause");
 	return 0;
 }
