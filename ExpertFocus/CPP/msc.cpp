@@ -4,30 +4,35 @@
 
 struct TmpPair
 {
-	TmpPair() : prev(nullptr), next(nullptr), x(0), y(0) {}
+	TmpPair() : prev(nullptr), next(nullptr), x(0), y(0), marked(false) {}
 	int x;
 	int y;
 	TmpPair* prev;
 	TmpPair* next;
+	bool marked;
 };
 
-TmpPair* GetElement(TmpPair* arr, int index) {
-	TmpPair* next = arr;
-	if (index == 0)
-		return arr;
-	for (int i = 1; i < index; ++i)
-		if (next->next != nullptr)
-			next = next->next;
-		else return nullptr;
+const TmpPair* GetElement(const TmpPair* arr, int index) {
+	const TmpPair* next = arr;
+	int counter = 0;
+	while (counter < index) {
+		if (next->next == nullptr)
+			return nullptr;
+		next = next->next;
+		counter++;
+	}
 	return next;
 }
 
 std::list<std::string> GetImageSet()
 {
 	std::list<std::string> imageList;
+	std::default_random_engine re(time(0));
+
 	while (imageList.size() < NUMBER_OF_IMAGES)
 	{
-		size_t imgNum = rand() % TOTAL_NUMBER_OF_IMAGES;
+		std::uniform_real_distribution<double> unif(0, TOTAL_NUMBER_OF_IMAGES);
+		int imgNum = (int)unif(re);
 		std::string path = "../ExpertFocus/RESOURCE/";
 		std::string name(std::to_string(imgNum) + ".jpg");
 		path.append(name);
@@ -36,7 +41,7 @@ std::list<std::string> GetImageSet()
 	return imageList;
 }
 
-std::vector<cv::Point2i> GetCenters(size_t width, size_t height, double minDist)
+std::vector<cv::Point2i> GetCenters(size_t width, size_t height, int minDist)
 {
 	std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
 
@@ -85,51 +90,78 @@ std::vector<cv::Point2i> GetCenters_optimize(size_t width, size_t height, int mi
 	std::vector<cv::Point2i> outs;
 	
 	TmpPair* allPoints = new TmpPair [width * height];
-	for (size_t i = 0; i < width; ++i)
-		for (size_t j = 0; j < height; ++j)
-		{
-			allPoints[i * width + j].prev = &allPoints[i*width + j - 1];
-			allPoints[i * width + j].next = &allPoints[i*width + j + 1];
-			allPoints[i * width + j].x = i;
-			allPoints[i * width + j].y = j;
-		}
+	for (int i = 0; i < width * height; ++i)
+	{
+		allPoints[i].prev = allPoints + i - 1;
+		allPoints[i].next = allPoints + i + 1;
+		allPoints[i].x	  = i % width;
+		allPoints[i].y    = i / width;
+	}
+	
 	allPoints[0].prev = nullptr;
 	allPoints[width * height - 1].next = nullptr;
 
-	size_t listLength = width * height;
+	int listLength = width * height;
+	std::default_random_engine re(time(0));
 
-	std::default_random_engine re;
-	minDist *= minDist;
+	int sqrDist = minDist * minDist;
+
+	cv::Mat img(height, width, CV_8UC3);
+	img.zeros(height, width, CV_8UC3);
+
 	while (listLength > 0)
 	{
-		std::uniform_real_distribution<double> unif(0, listLength - 1);
+		std::uniform_real_distribution<double> unif(0, listLength);
 		int toAdd = (int)unif(re);
 
-		TmpPair* tmpPoint = GetElement(allPoints, toAdd);
+		const TmpPair* tmpPoint = GetElement(allPoints, toAdd);
+		if (tmpPoint == nullptr)
+		{
+			std::cout << "NullPtr was returned with listLength = " << listLength
+				      << " and index " << toAdd << "\n";
+			return outs;
+		}
 		cv::Point2i point(tmpPoint->x, tmpPoint->y);
+		outs.push_back(point);
 
-		int top = (tmpPoint->x - minDist < (size_t)0 ) ? 0 : tmpPoint->x - minDist;
-		int bot = (tmpPoint->x + minDist > width) ? width : tmpPoint->x + minDist;
-		int lft = (tmpPoint->y - minDist < (size_t)0 ) ? 0 : tmpPoint->y - minDist;
-		int rgt = (tmpPoint->y + minDist > height) ? height : tmpPoint->y + minDist;
+		int lft = (point.x - minDist < 0 )		   ? 0		    : point.x - minDist;
+		int rgt = (point.x + minDist > width - 1)  ? width - 1  : point.x + minDist;
+		int top = (point.y - minDist < 0 )		   ? 0		    : point.y - minDist;
+		int bot = (point.y + minDist > height - 1) ? height - 1 : point.y + minDist;
 
-		for (int i = lft; i < rgt; ++i)
-			for (int j = top; j < bot; ++j)
+		for (int i = lft; i <= rgt; ++i)
+			for (int j = top; j <= bot; ++j)
 			{
 				int index = j * width + i;
-				double dist = (point.x - allPoints[index].x)*(point.x - allPoints[index].x) - 
-							  (point.y - allPoints[index].y)*(point.y - allPoints[index].y);
-				if (dist < minDist)
+				if (!allPoints[index].marked)
 				{
-					if (allPoints[index].prev != nullptr)
-						allPoints[index].prev->next = allPoints[index].next;
-					if (allPoints[index].next != nullptr)
-						allPoints[index].next->prev = allPoints[index].prev;
-					allPoints[index].next = nullptr;
-					allPoints[index].prev = nullptr;
-					listLength--;
+					double dist = (point.x - allPoints[index].x)*(point.x - allPoints[index].x) + 
+								  (point.y - allPoints[index].y)*(point.y - allPoints[index].y);
+					if (dist < sqrDist)
+					{
+						if (allPoints[index].prev != nullptr)
+							allPoints[index].prev->next = allPoints[index].next;
+						if (allPoints[index].next != nullptr)
+							allPoints[index].next->prev = allPoints[index].prev;
+						allPoints[index].next = nullptr;
+						allPoints[index].prev = nullptr;
+						allPoints[index].marked = true;
+						listLength--;
+						cv::circle(img, cv::Point2i(allPoints[index].x, allPoints[index].y), 0, cv::Scalar(255, 0, 0));
+					}
 				}
 			}
+
+		cv::circle(img, cv::Point2i(point.x, point.y), 50, cv::Scalar(0, 0, 255));
+		cv::imshow("Test", img);
+		cv::waitKey(1);
+		cv::Mat marked(height, width, CV_8UC1);
+		marked.zeros(height, width, CV_8UC1);
+		for (int i = 0; i < height; ++i)
+		for (int j = 0; j < width; ++j)
+			cv::circle(marked, cv::Point(allPoints[].x, allPoints[].y), 0, cv::Scalar(0, 255, 255));
+		cv::imshow("Test", img);
+		cv::waitKey(1);
 	}
 
 	delete [] allPoints;
@@ -137,16 +169,16 @@ std::vector<cv::Point2i> GetCenters_optimize(size_t width, size_t height, int mi
 	std::chrono::high_resolution_clock::time_point finish = std::chrono::high_resolution_clock::now();
 	double time = std::chrono::duration_cast<std::chrono::milliseconds>(finish - start).count() / 1000.0;
 	std::cout << "\"GetCenters_opt\" function was executed in " << time << " seconds\n";
+	std::cout << "Size: " << listLength << "\n";
 	return outs;
 }
 
-cv::Mat DrawCenters(cv::Mat& src, double minDist)
+cv::Mat DrawCenters(cv::Mat& src, std::vector<cv::Point2i>& centers, int radius)
 {
 	size_t width  = src.cols;
 	size_t height = src.rows;
-	std::vector<cv::Point2i> centers = GetCenters(width, height, minDist);
 	cv::Mat out(src);
 	for (size_t i = 0; i < centers.size(); ++i)
-		cv::circle(out, centers[i], 3, cv::Scalar(0, 0, 255), -1);
+		cv::circle(out, centers[i], radius, cv::Scalar(0, 0, 255), 1);
 	return out;
 }
