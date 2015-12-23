@@ -11,10 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CPP\callbacks.cpp" />
     <ClCompile Include="CPP\main.cpp" />
     <ClCompile Include="CPP\msc.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="INCLUDE\callbacks.h" />
     <ClInclude Include="INCLUDE\msc.h" />
     <ClInclude Include="INCLUDE\options.h" />
   </ItemGroup>

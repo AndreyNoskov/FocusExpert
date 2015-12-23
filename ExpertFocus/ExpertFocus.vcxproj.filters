@@ -24,12 +24,18 @@
     <ClCompile Include="CPP\msc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CPP\callbacks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="INCLUDE\msc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="INCLUDE\options.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="INCLUDE\callbacks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
