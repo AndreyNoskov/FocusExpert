@@ -27,15 +27,21 @@
     <ClCompile Include="CPP\callbacks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CPP\loader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="INCLUDE\msc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="INCLUDE\options.h">
+    <ClInclude Include="INCLUDE\callbacks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="INCLUDE\callbacks.h">
+    <ClInclude Include="INCLUDE\loader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="INCLUDE\session.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

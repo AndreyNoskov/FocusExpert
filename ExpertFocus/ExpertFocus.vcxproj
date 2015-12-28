@@ -12,13 +12,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CPP\callbacks.cpp" />
+    <ClCompile Include="CPP\loader.cpp" />
     <ClCompile Include="CPP\main.cpp" />
     <ClCompile Include="CPP\msc.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="INCLUDE\callbacks.h" />
+    <ClInclude Include="INCLUDE\loader.h" />
     <ClInclude Include="INCLUDE\msc.h" />
-    <ClInclude Include="INCLUDE\options.h" />
+    <ClInclude Include="INCLUDE\session.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="RESOURCE\0.jpg" />

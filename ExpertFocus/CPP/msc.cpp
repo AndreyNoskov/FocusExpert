@@ -1,6 +1,8 @@
 #include <msc.h>
 #include <chrono>
 #include <random>
+#include <loader.h>
+
 
 struct TmpPair
 {
@@ -30,16 +32,16 @@ const TmpPair* GetElement(const TmpPair* arr, int index) {
 	return next;
 }
 
-std::list<std::string> GetImageSet()
+std::list<std::string> GetImageSet(Options* options)
 {
 	std::list<std::string> imageList;
 	std::default_random_engine re((unsigned int)time(0));
 
-	while (imageList.size() < NUMBER_OF_IMAGES)
+	while (imageList.size() < options->GetNumberOfImages())
 	{
-		std::uniform_real_distribution<double> unif(0, TOTAL_NUMBER_OF_IMAGES);
+		std::uniform_real_distribution<double> unif(0, options->GetTotalNumberOfImages());
 		int imgNum = (int)unif(re);
-		std::string path = "../ExpertFocus/RESOURCE/";
+		std::string path = options->GetPathToBase();
 		std::string name(std::to_string(imgNum) + ".jpg");
 		path.append(name);
 		imageList.push_back(path);
@@ -188,11 +190,8 @@ cv::Mat DrawCenters(cv::Mat& src, std::vector<cv::Point2i>& centers, int radius)
 
 std::vector<std::vector<cv::Point>> CreateVoronoi(std::vector<cv::Point2i>& points, int width, int height)
 {
-	cv::RNG rng(12345);
-
 	cv::Mat out(height, width, CV_8UC1);
 	cv::Mat voronoi;
-//	cv::Mat forContours(height, width, CV_8SC3);
 
 	std::vector<std::vector<cv::Point> > contours;
 	std::vector<cv::Vec4i> hierarchy;
@@ -203,14 +202,6 @@ std::vector<std::vector<cv::Point>> CreateVoronoi(std::vector<cv::Point2i>& poin
 		out.data[points[i].y * width + points[i].x] = 0;
 	cv::distanceTransform(out, out, voronoi, CV_DIST_L2, CV_DIST_MASK_3, 1);
 	cv::findContours(voronoi, contours, hierarchy,  CV_RETR_FLOODFILL, CV_CHAIN_APPROX_SIMPLE);
-/*	for (int i = 0; i < contours.size(); i++)
-	{
-		cv::Scalar color = cv::Scalar(rng.uniform(0, 255), rng.uniform(0, 255), rng.uniform(0, 255));
-		drawContours(forContours, contours, i, color, 2, 8, hierarchy, 0, cv::Point());
-	}
-	cv::namedWindow("Contours", CV_WINDOW_AUTOSIZE);
-	cv::imshow("Contours", forContours);
-	cv::waitKey();
-*/
+
 	return contours;
 }

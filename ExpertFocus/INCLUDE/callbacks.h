@@ -5,9 +5,9 @@
 #include <opencv2/opencv.hpp>
 
 struct CallbackData {
-	CallbackData(cv::Mat* img,
-				 cv::Mat* mask,
-				 cv::Mat* blend,
+	CallbackData(cv::Mat*	img,
+				 cv::Mat*	mask,
+				 cv::Mat*	blend,
 				 std::string* winName,
 				 std::vector<std::vector<cv::Point>>* contours) :
 		img(img), mask(mask), blend(blend), winName(winName), contours(contours) {}

@@ -7,7 +7,7 @@ void on_mouse_click(int e, int x, int y, int d, void*  ptr)
 		CallbackData* cbd = (CallbackData*)ptr;
 		std::vector<std::vector<cv::Point>>* contours = cbd->contours;
 		for (int i = 0; i < contours->size(); ++i)
-			if (cv::pointPolygonTest((*(contours))[i], cv::Point(x, y), false) > 0)
+			if (cv::pointPolygonTest((*(contours))[i], cv::Point(x, y), false) >= 0)
 			{
 				if ( cbd->mask->at<cv::Vec3b>(cv::Point(x, y))[1] == 0 ) 
 					cv::fillConvexPoly(*(cbd->mask), (*(contours))[i], cv::Scalar(0, 255, 0));
