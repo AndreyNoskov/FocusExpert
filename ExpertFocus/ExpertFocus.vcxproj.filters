@@ -14,7 +14,7 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Resource Files\images">
-      <UniqueIdentifier>{ab60fb14-b73e-4770-b44a-6d31f4677cec}</UniqueIdentifier>
+      <UniqueIdentifier>{33dddfa2-b283-40dd-b204-e67e8b19c820}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -28,6 +28,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CPP\loader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CPP\session.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -46,118 +49,118 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="RESOURCE\0.jpg">
+    <Image Include="RESOURCE\base\0.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\1.jpg">
+    <Image Include="RESOURCE\base\1.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\2.jpg">
+    <Image Include="RESOURCE\base\2.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\3.jpg">
+    <Image Include="RESOURCE\base\3.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\4.jpg">
+    <Image Include="RESOURCE\base\4.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\5.jpg">
+    <Image Include="RESOURCE\base\5.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\6.jpg">
+    <Image Include="RESOURCE\base\6.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\7.jpg">
+    <Image Include="RESOURCE\base\7.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\8.jpg">
+    <Image Include="RESOURCE\base\8.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\9.jpg">
+    <Image Include="RESOURCE\base\9.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\10.jpg">
+    <Image Include="RESOURCE\base\10.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\11.jpg">
+    <Image Include="RESOURCE\base\11.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\12.jpg">
+    <Image Include="RESOURCE\base\12.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\13.jpg">
+    <Image Include="RESOURCE\base\13.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\14.jpg">
+    <Image Include="RESOURCE\base\14.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\15.jpg">
+    <Image Include="RESOURCE\base\15.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\16.jpg">
+    <Image Include="RESOURCE\base\16.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\17.jpg">
+    <Image Include="RESOURCE\base\17.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\18.jpg">
+    <Image Include="RESOURCE\base\18.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\19.jpg">
+    <Image Include="RESOURCE\base\19.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\20.jpg">
+    <Image Include="RESOURCE\base\20.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\21.jpg">
+    <Image Include="RESOURCE\base\21.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\22.jpg">
+    <Image Include="RESOURCE\base\22.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\23.jpg">
+    <Image Include="RESOURCE\base\23.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\24.jpg">
+    <Image Include="RESOURCE\base\24.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\25.jpg">
+    <Image Include="RESOURCE\base\25.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\26.jpg">
+    <Image Include="RESOURCE\base\26.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\27.jpg">
+    <Image Include="RESOURCE\base\27.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\28.jpg">
+    <Image Include="RESOURCE\base\28.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\29.jpg">
+    <Image Include="RESOURCE\base\29.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\30.jpg">
+    <Image Include="RESOURCE\base\30.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\31.jpg">
+    <Image Include="RESOURCE\base\31.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\32.jpg">
+    <Image Include="RESOURCE\base\32.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\33.jpg">
+    <Image Include="RESOURCE\base\33.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\34.jpg">
+    <Image Include="RESOURCE\base\34.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\35.jpg">
+    <Image Include="RESOURCE\base\35.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\36.jpg">
+    <Image Include="RESOURCE\base\36.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
-    <Image Include="RESOURCE\37.jpg">
+    <Image Include="RESOURCE\base\37.jpg">
       <Filter>Resource Files\images</Filter>
     </Image>
   </ItemGroup>

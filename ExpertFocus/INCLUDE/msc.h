@@ -1,6 +1,7 @@
 #pragma  once
 
 // std includes
+#include <set>
 #include <list>
 #include <string>
 #include <vector>
@@ -11,7 +12,7 @@
 // local includes
 #include <loader.h>
 
-std::list<std::string> GetImageSet(Options* options);
+std::set<int> GetImageSet(Options* options);
 
 std::vector<cv::Point2i> GetCenters(size_t width, size_t height, int minDist);
 std::vector<cv::Point2i> GetCenters_optimize(size_t width, size_t height, int minDist);

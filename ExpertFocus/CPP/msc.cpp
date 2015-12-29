@@ -32,19 +32,16 @@ const TmpPair* GetElement(const TmpPair* arr, int index) {
 	return next;
 }
 
-std::list<std::string> GetImageSet(Options* options)
+std::set<int> GetImageSet(Options* options)
 {
-	std::list<std::string> imageList;
+	std::set<int> imageList;
 	std::default_random_engine re((unsigned int)time(0));
 
 	while (imageList.size() < options->GetNumberOfImages())
 	{
 		std::uniform_real_distribution<double> unif(0, options->GetTotalNumberOfImages());
 		int imgNum = (int)unif(re);
-		std::string path = options->GetPathToBase();
-		std::string name(std::to_string(imgNum) + ".jpg");
-		path.append(name);
-		imageList.push_back(path);
+		imageList.insert(imgNum);
 	}
 	return imageList;
 }
@@ -174,7 +171,7 @@ std::vector<cv::Point2i> GetCenters_optimize(size_t width, size_t height, int mi
 	std::chrono::high_resolution_clock::time_point finish = std::chrono::high_resolution_clock::now();
 	double time = std::chrono::duration_cast<std::chrono::milliseconds>(finish - start).count() / 1000.0;
 	std::cout << "\"GetCenters_opt\" function was executed in " << time << " seconds\n";
-	std::cout << "Size: " << listLength << "\n";
+	//std::cout << "Size: " << listLength << "\n";
 	return outs;
 }
 
